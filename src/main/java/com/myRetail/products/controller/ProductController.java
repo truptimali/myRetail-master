@@ -1,7 +1,7 @@
 package com.myRetail.products.controller;
 
 import java.util.concurrent.ExecutionException;
-import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.myRetail.products.exception.InterfaceException;
 import com.myRetail.products.exception.ProductIDConflictException;
 import com.myRetail.products.object.Acknowledgement;
 import com.myRetail.products.object.Product;
@@ -34,7 +33,7 @@ public class ProductController {
 	}
 
 	@PostMapping("/products/createProduct")
-	public Acknowledgement postProductDetails(@Valid @RequestBody Product product)
+	public Acknowledgement postProductDetails( @RequestBody Product product)
 			throws InterruptedException, ExecutionException {
 		ValidateContent.validationContent(product);
 		Acknowledgement postedProduct = firebaseService.saveProductDetails(product);
